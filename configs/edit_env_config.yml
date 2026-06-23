@@ -1,0 +1,48 @@
+# Config for the interactive editing environment (editing_env/app.py).
+# The default checkpoint is downloaded from there automatically by tf_pipeline.py is TF_L_edit
+# (no local `load_from` needed). To use a local checkpoint instead, set the
+# TF_LOAD_FROM env var, or fill in `load_from` below.
+
+dataset:
+  kind: latent_hier
+  image_size: 16
+  image_channels: 768
+  num_levels: 4
+  num_classes: 1000
+
+model:
+  model_str: pmfDiT_L_16    # pMF-L/16
+  noise_scale: 1.0          # for pMF-L/16
+  use_token_embed: true
+  use_prev_cond: true
+  use_level_cond: true
+  num_levels: 4   
+  use_cfg: false           
+  cond_token_mode: fused   
+  time_shift: true
+
+sampling:
+  num_steps: 1
+  interval:
+    - [0.1, 0.7]
+  omegas: [1.0]
+  emas: [500]              
+
+rae_decoder:
+  code_dir: third_party/rae_decoder
+  enabled: true
+  decoder_config_path: third_party/rae_decoder/configs/ViTXL
+  pretrained_decoder_path: checkpoints/rae/decoders/dinov2/wReg_base/ViTXL_n08/model.pt
+  latent_dim: 768
+  latent_hw: 16
+  decoder_patch_size: 16
+  device: ""
+  batch_size: 160
+
+logging:
+  exp_name: "edit_env"
+  timestamped_run_subdir: false
+  use_wandb: false
+
+load_from: ""               # empty -> tf_pipeline pulls TF_L_edit from HuggingFace
+eval_only: true

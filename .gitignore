@@ -1,0 +1,10 @@
+.venv/
+preprocessed_data/
+data/
+logs/
+checkpoints/
+results/
+outputs/
+*.pyc
+__pycache__/
+.DS_Store

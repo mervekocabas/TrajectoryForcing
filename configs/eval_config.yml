@@ -1,0 +1,62 @@
+dataset:
+  kind: latent_hier
+  image_size: 16
+  image_channels: 768
+  num_levels: 4
+  num_classes: 1000
+
+model:
+  model_str: pmfDiT_B_16 # specify model config
+  noise_scale: 1.0 # for pMF-B/16; 2.0 for pMF-B/32; 1.0 for pMF-L/16; 4.0 for pMF-L/32
+  use_token_embed: true
+  use_prev_cond: true
+  use_level_cond: true
+  num_levels: 4
+  cond_token_mode: fused  # must match training
+  time_shift: true
+  time_dist_shift: 10.0
+  use_cfg: false
+
+fid:
+    device_batch_size: 160
+    num_samples: 50000
+    
+    cache_ref: fid_ref/imagenet_256_fid_stats.npz
+
+sampling:
+    # omega and interval is not used since without cfg
+    # grid search can be done for emas including 500, 1000, 2000
+    num_steps: 1
+    interval:
+        - [0.0, 1.0]
+    omegas: [1.0]
+    emas: [500]
+
+rae_decoder:
+    code_dir: third_party/rae_decoder
+    enabled: true
+    decoder_config_path: third_party/rae_decoder/configs/ViTXL
+    pretrained_decoder_path: checkpoints/rae/decoders/dinov2/wReg_base/ViTXL_n08/model.pt
+    latent_dim: 768
+    latent_hw: 16
+    decoder_patch_size: 16
+    device: "" 
+    batch_size: 160
+
+logging:
+    exp_name: "fid_eval"
+    timestamped_run_subdir: true
+    use_wandb: False # set to True to use wandb
+    wandb_project: 'YOUR PROJECT' # change to your wandb project
+    wandb_entity: 'YOUR ENTITY' # paste your wandb entity here
+    wandb_tags: # use your own tags
+        - YOUR TAGS
+    wandb_notes: '' # your wandb notes
+
+load_from_folder: ""                  # directory of checkpoints to sweep (unused for single-ckpt eval)
+save_json: "fid_result.json"          # where to write the FID result
+load_from_start_step: 6255              
+load_from_step: 6255                    
+
+load_from: "checkpoints/TF_B"  # single checkpoint to evaluate
+eval_only: true

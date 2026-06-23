@@ -1,0 +1,21 @@
+# Minimal dependencies to run ONLY the interactive editing app (Colab T4).
+#
+# Install:
+#   pip install -r editing_env/requirements.txt
+
+# --- JAX (GPU, CUDA 12) — runs the flow model ---
+jax[cuda12]==0.4.36
+
+# --- Flax / checkpointing / config stack ---
+flax==0.10.4
+optax==0.2.5
+orbax-checkpoint==0.11.0
+chex==0.1.87 
+ml_dtypes==0.5.1
+tensorstore==0.1.76
+ml_collections==1.1.0
+
+# --- App UI + IO ---
+gradio==6.13.0
+huggingface_hub
+PyYAML

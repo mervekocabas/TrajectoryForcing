@@ -1,0 +1,94 @@
+dataset:
+    kind: latent_hier
+    root: preprocessed_data/train
+
+    image_size: 16
+    image_channels: 768
+    num_levels: 4
+    num_classes: 1000
+
+    class_map_path: ""
+    max_open_npz: 128
+    sample_single_level_per_batch: true
+    level_seed: 0
+    use_flip: false
+
+model:
+    model_str: pmfDiT_B_16
+
+    # Keep pMF-B backbone shape (depth/heads/aux head depth) via model_str.
+    use_token_embed: true
+    use_prev_cond: true
+    use_level_cond: true
+
+    num_levels: 4
+    cond_token_mode: fused  # switch to fused for 256-token fused conditioning (full_concat is 512 tokens)
+    gradient_checkpointing: false
+
+    use_cfg: false 
+    P_mean: 0.0
+    P_std: 1.0
+    time_shift: True
+    noise_scale: 1.0
+    tr_uniform: true
+    tr_uniform_prob: 0.1
+    use_plateau_lognormal: true
+    time_dist_shift: 10.0
+
+    # Region losses are automatically masked out on the last level.
+    struct_weight: 0.0
+    region_var_weight: 1.0
+    region_collapse_weight: 0.0
+
+    lpips: false
+    convnext: false
+
+training:
+    log_per_step: 100
+    checkpoint_per_epoch: 5
+
+    num_epochs: 80
+    batch_size: 1024
+    learning_rate: 0.01        
+
+    adam_b2: 0.95
+    ema_type: edm
+    ema_val: [500, 1000, 2000]
+    seed: 42
+
+    # Disable RGB sampling/FID for latent-space training.
+    sample_per_epoch: 0
+    fid_per_epoch: 0
+    # Save latent snapshots for inspection.
+    latent_save_per_epoch: 0
+    latent_save_num_samples: 5
+    latent_save_use_ema: false
+    latent_save_ema: 2000
+    # Save processed training inputs (exact tensors before model) for debugging.
+    train_input_vis_num_samples_per_level: 0
+    train_input_vis_include_prev: true
+    checkpoint_keep: all
+    checkpoint_backend: legacy
+
+sampling:
+    num_steps: 1
+    omega: 1.0
+    t_min: 0.0
+    t_max: 1.0
+    return_all_levels: false
+
+fid:
+    device_batch_size: 40
+    num_samples: 50000
+    cache_ref: ""
+
+logging:
+    use_wandb: False # set to True to use wandb
+    wandb_project: 'YOUR PROJECT' # change to your wandb project
+    wandb_entity: 'YOUR ENTITY' # paste your wandb entity here
+    wandb_tags: # use your own tags
+        - YOUR TAGS
+    wandb_notes: 'YOUR NOTES' # your wandb notes
+
+load_from: ""
+eval_only: false

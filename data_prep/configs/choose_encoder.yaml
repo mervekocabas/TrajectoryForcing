@@ -1,0 +1,63 @@
+# --- IO paths ---
+base_dir: data/imagenet   # ImageFolder train/ and val/ subdirs
+out_root: preprocessed_data  # output directory for the leveled/normalized latents
+
+# --- run options ---
+split: "train"          # "train" | "validation" 
+max_batches: -1          # how many batches to process (use -1 for all)
+
+# --- save options ---
+# mode:
+#   "full"   -> store z (default) + hierarchy stats
+#   "compact"-> omit z, store pca_rgb for visualization
+# save_z and save_pca_rgb override mode when set
+# save:
+#   mode: "full"
+#   z_dtype: "float16"      # "float16" | "bfloat16" | "float32"
+#   archive: null           # null | "tar"
+#   # archive_tmp: "_pt_tmp"
+#   # archive_keep_pt: false
+#   # archive_on_class_change: true
+#   # save_z: true
+#   # save_pca_rgb: true
+
+save:
+  archive: tar
+  archive_mode: sharded
+  samples_per_tar: 2500     # tune: 500-2000 is a good start
+  shard_prefix: train       # optional, default is split dir name
+  archive_tmp: _pt_tmp
+  archive_keep_pt: false
+  archive_on_class_change: false   # must stay false for sharded mode
+  z_dtype: float16
+  write_manifest_pkl: true
+  write_class_map_json: true
+
+# --- data loader ---
+dataloader:
+  batch_size: 256
+  workers: 4
+  shuffle: false
+  # image_size: if omitted, will use the encoder's default 256
+  image_size: null
+  # null -> encode all classes (WNIDs come from the train/<wnid>/ folder names).
+  # To restrict to a subset, set a json listing the WNIDs to keep:
+  #   {"root": {"n01440764": "...", ...}}   (only the WNID keys are used)
+  imagenetsmall: null
+
+# --- encoder selection ---
+encoder_type: "dinov2"  # "dinov2" | "siglip2" | "dinov3"
+
+# Do not change 
+# --- encoder definitions --- 
+encoders:
+  dinov2:
+    cls: "Dinov2withNorm"
+    config_path: "facebook/dinov2-with-registers-base"
+    input_size: 224
+    patch_size: 14
+    normalization_stat_path: "checkpoints/rae/stats/dinov2/wReg_base/imagenet1k/stat.pt"
+    params:
+      dinov2_path: "facebook/dinov2-with-registers-base"
+      normalize: true
+   

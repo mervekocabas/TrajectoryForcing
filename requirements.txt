@@ -1,0 +1,42 @@
+# Single-command install (no extra post-steps):
+#
+#   pip install -r requirements.txt
+
+# JAX training stack (GPU, CUDA 12)
+jax[cuda12]==0.4.36
+flax==0.10.4
+optax==0.2.5
+orbax-checkpoint==0.11.0
+chex==0.1.87  
+ml_dtypes==0.5.1
+tensorstore==0.1.76
+ml_collections==1.1.0
+lpips_j
+
+# Data pipeline + encoder (PyTorch / HuggingFace)
+torch==2.6.0
+torchvision==0.21.0
+transformers==5.3.0
+fastcluster
+
+# Utilities
+numpy>=2.2
+scipy==1.15.3
+scikit-learn==1.8.0
+pillow==12.1.1
+wandb==0.22.0
+
+# Interactive env
+gradio==6.13.0
+
+# FD-loss post-training
+einops
+diffusers
+timm
+muon-optimizer
+rich
+tabulate
+pandas
+matplotlib
+opencv-python
+gdown
