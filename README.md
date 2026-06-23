@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://mervekocabas.github.io/TrajectoryForcing/">[Project Page]</a>
-  <a href="">[Paper]</a>
+  <a href="https://arxiv.org/abs/2606.22527">[Paper]</a>
   <a href="https://huggingface.co/mervekocabas/TrajectoryForcing/tree/main">[Models]</a>
   <a href="https://colab.research.google.com/drive/1CZgGT1rEJ5nQ2D8fLYRyTqUIvLpwzCSP?usp=sharing">[Colab]</a>
 </p>
