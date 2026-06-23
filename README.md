@@ -255,4 +255,7 @@ TrajectoryForcing builds directly on prior open-source work:
 - **[RAE](https://github.com/bytetriper/RAE) encoder–decoder** — the
   representation encoder (`data_prep/`) and decoder
   (`third_party/rae_decoder/`) used for latent-space generation.
+- **[FD-loss](https://github.com/Jiawei-Yang/FD-loss)** — the Representation
+  Fréchet Distance loss that the post-training stage
+  (`third_party/fd_loss/`) is built on for better end image quality.
 
