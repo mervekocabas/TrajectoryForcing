@@ -241,10 +241,10 @@ scripts/            # install / download_models / preprocess_data / train / eval
 If you find this work useful in your research, please consider citing it:
 
 ```bib
-@inproceedings{kocabas2026trajectoryforcing,
-  author    = {Kocabas, Merve and Gao, Gege and Sch\"olkopf, Bernhard and Geiger, Andreas},
+@Inproceedings{kocabas2026trajectoryforcing,
+  author    = {Kocabas, Merve and Gao, Gege and Schölkopf, Bernhard and Geiger, Andreas},
   title     = {Trajectory Forcing: Structure-First Generation with Controllable Semantic Trajectories},
-  booktitle = {Proc. of the European Conference on Computer Vision (ECCV)},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV)},
   year      = {2026},
 }
 ```
