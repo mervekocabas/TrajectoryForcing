@@ -5,6 +5,7 @@
   <a href="https://arxiv.org/abs/2606.22527">[Paper]</a>
   <a href="https://huggingface.co/mervekocabas/TrajectoryForcing/tree/main">[Models]</a>
   <a href="https://colab.research.google.com/drive/1CZgGT1rEJ5nQ2D8fLYRyTqUIvLpwzCSP?usp=sharing">[Colab]</a>
+  <a href="https://github.com/KorayUlusan/ComfyUI-TrajectoryForcing">[Community ComfyUI Nodes]</a>
 </p>
 
 <p align="center">
@@ -218,6 +219,18 @@ https://github.com/user-attachments/assets/1ddb36e1-f458-4ee9-aff8-05894a052f9b
 ▶️ If the video does not render inline, open
 [`assets/editing_env_demo.mp4`](assets/editing_demo.mp4) directly.
 
+## Community integrations
+
+**[ComfyUI-TrajectoryForcing](https://github.com/KorayUlusan/ComfyUI-TrajectoryForcing)**,
+created and maintained by **[Koray Ulusan](https://github.com/KorayUlusan)**,
+provides ComfyUI nodes for coarse-to-fine generation, intermediate latent
+previews, and interactive latent-token editing. See the integration's README
+for installation instructions and example workflows.
+
+> This is an independently maintained community integration. Please report
+> integration-specific questions and issues in its
+> [repository](https://github.com/KorayUlusan/ComfyUI-TrajectoryForcing/issues).
+
 ## Repository structure
 
 ```
@@ -258,4 +271,3 @@ TrajectoryForcing builds directly on prior open-source work:
 - **[FD-loss](https://github.com/Jiawei-Yang/FD-loss)** — the Representation
   Fréchet Distance loss that the post-training stage
   (`third_party/fd_loss/`) is built on for better end image quality.
-
