@@ -4,7 +4,10 @@ import torch.nn.functional as F
 from math import sqrt
 from typing import Optional, Protocol
 from transformers import AutoImageProcessor, AutoConfig
-from models import ARCHS  
+try:
+    from .models import ARCHS
+except ImportError:
+    from models import ARCHS
 from sklearn.decomposition import PCA
 from torchvision.utils import save_image
 
